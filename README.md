@@ -1,1 +1,1 @@
-# SQL-50-leetcode
+# leetcode problems
