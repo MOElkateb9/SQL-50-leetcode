@@ -1,0 +1,9 @@
+problem
+https://leetcode.com/problems/product-sales-analysis-i/description/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+select  product_name  , year  ,  price 
+from Sales 
+Inner join Product
+USING (product_id)
+order by price desc , year desc
