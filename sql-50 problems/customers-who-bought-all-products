@@ -1,0 +1,12 @@
+problem:-
+https://leetcode.com/problems/customers-who-bought-all-products/submissions/1279696860/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+select customer_id
+from customer 
+group by customer_id
+having count(distinct product_key) = (
+                                        select  count(distinct product_key)
+                                        from Product)
+order by customer_id
+
