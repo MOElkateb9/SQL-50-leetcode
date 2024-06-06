@@ -1,0 +1,29 @@
+problem
+https://leetcode.com/problems/average-time-of-process-per-machine/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+
+WITH process_times AS (
+    SELECT 
+            machine_id,
+            process_id,
+            MAX(CASE WHEN activity_type = 'end' THEN timestamp END) AS end_t,
+            MAX(CASE WHEN activity_type = 'start' THEN timestamp END) AS Start_t
+        FROM Activity
+        GROUP BY machine_id, process_id
+)
+
+SELECT 
+    machine_id,
+    ROUND(AVG(processing_time)::numeric, 3) AS processing_time
+FROM (
+    SELECT 
+        machine_id,
+        process_id,
+        AVG(end_t - Start_t) AS processing_time
+    FROM  process_times
+    GROUP BY machine_id, process_id
+) AS avg_process_times
+
+GROUP BY machine_id
+order by machine_id
