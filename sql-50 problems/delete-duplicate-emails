@@ -1,0 +1,14 @@
+Problem
+https://leetcode.com/problems/delete-duplicate-emails/submissions/1280966820/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+
+with filterr as (
+select  min(id) as id , email
+from person
+group by 2)
+
+delete from person 
+where person.id NOT IN (
+    select id from filterr
+)
