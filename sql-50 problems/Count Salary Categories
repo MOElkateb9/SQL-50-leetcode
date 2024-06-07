@@ -1,0 +1,34 @@
+problem
+https://leetcode.com/problems/count-salary-categories/description/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+
+with filterr as (
+select case when income < 20000 then 'Low Salary'
+            when income between 20000 and 50000 then 'Average Salary'
+            when income > 50000 then 'High Salary' END as category 
+from accounts
+) ,
+
+categories AS (
+    SELECT 'Low Salary' AS category
+    UNION ALL
+    SELECT 'Average Salary' AS category
+    UNION ALL
+    SELECT 'High Salary' AS category
+)
+
+ select 
+ t2.category , coalesce(count(t1.category),0) as accounts_count
+ from categories as t2 
+ left join filterr as t1
+ using(category)
+ group by t2.category
+
+
+
+
+
+
+
+
