@@ -1,0 +1,18 @@
+problem
+https://leetcode.com/problems/last-person-to-fit-in-the-bus/submissions/1280532653/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+
+
+with filterr as (
+select person_name, 
+sum(weight) over( order by turn ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW ) as total
+from Queue
+)
+
+select person_name as  person_name
+from filterr 
+where total <=1000
+limit 1 offset (select count (person_name) from filterr where total <=1000) -1
+
+
