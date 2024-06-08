@@ -1,0 +1,14 @@
+problem
+https://leetcode.com/problems/game-play-analysis-iv/description/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+SELECT ROUND(SUM(
+        CASE 
+            WHEN (player_id, event_date - INTERVAL '1 day') IN (
+            SELECT player_id, MIN(event_date) AS first_date FROM Activity
+            GROUP BY player_id
+            ) THEN 1
+            ELSE 0
+        END
+    )::numeric / COUNT(DISTINCT player_id), 2) AS fraction 
+FROM Activity
