@@ -1,0 +1,25 @@
+problem
+https://leetcode.com/problems/department-top-three-salaries/?envType=study-plan-v2&envId=top-sql-50
+solution :-
+
+
+with concat as (
+select dense_rank() over (partition by d.name order by salary desc) ,
+        d.name AS Department, 
+        e.name AS Employee, 
+        e.salary AS Salary
+from Employee as e 
+left join Department as d 
+on d.id = e.departmentID
+order by e.departmentId asc , e.salary desc 
+) 
+
+select  Department ,  
+        Employee , 
+        Salary
+from  concat
+where dense_rank IN (
+    select dense_rank 
+    from concat 
+    where dense_rank between 1 and 3
+)
