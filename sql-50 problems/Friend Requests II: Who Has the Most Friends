@@ -1,0 +1,30 @@
+problem 
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/?envType=study-plan-v2&envId=top-sql-50
+solution:-
+
+WITH sent_requests AS (
+    SELECT requester_id AS user_id, COUNT(*) AS sent_count
+    FROM RequestAccepted
+    GROUP BY requester_id
+),
+
+received_requests AS (
+    SELECT accepter_id as user_id, COUNT(*) as received_count
+    FROM RequestAccepted
+    GROUP BY accepter_id
+),
+
+total_requests AS (
+    SELECT
+        COALESCE(sent_requests.user_id, received_requests.user_id) AS user_id,
+        COALESCE(sent_count, 0) + COALESCE(received_count, 0) AS total_count
+    FROM sent_requests
+    FULL OUTER JOIN received_requests
+    ON sent_requests.user_id = received_requests.user_id
+)
+
+SELECT user_id AS id, MAX(total_count) AS num
+FROM total_requests
+GROUP BY user_id
+ORDER BY num DESC
+LIMIT 1;
