@@ -1,5 +1,6 @@
 problem
-[LeetCode Problem: List the Products Ordered in a Period](https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/?envType=study-plan-v2&envId=top-sql-50)solution :-
+https://leetcode.com/problems/list-the-products-ordered-in-a-period/?envType=study-plan-v2&envId=top-sql-50
+solution :-
 
 
 select product_name , sum(unit) as unit
