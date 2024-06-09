@@ -1,0 +1,8 @@
+problem
+https://leetcode.com/problems/reshape-data-pivot/submissions/1282703037/?envType=study-plan-v2&envId=introduction-to-pandas&lang=pythondata
+solution:-
+
+import pandas as pd
+
+def pivotTable(weather: pd.DataFrame) -> pd.DataFrame:
+   return weather.pivot(index='month',columns='city',values='temperature')
