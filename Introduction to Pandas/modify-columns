@@ -1,0 +1,9 @@
+problem
+https://leetcode.com/problems/modify-columns/submissions/1282690309/?envType=study-plan-v2&envId=introduction-to-pandas&lang=pythondata
+solution:-
+
+import pandas as pd
+
+def modifySalaryColumn(employees: pd.DataFrame) -> pd.DataFrame:
+    employees.salary= employees.salary*2
+    return employees
