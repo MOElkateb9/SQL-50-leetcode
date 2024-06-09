@@ -1,0 +1,9 @@
+problem
+https://leetcode.com/problems/drop-missing-data/?envType=study-plan-v2&envId=introduction-to-pandas&lang=pythondata
+solution:-
+
+import pandas as pd
+
+def dropMissingData(students: pd.DataFrame) -> pd.DataFrame:
+    students.dropna(subset=['name'], axis =0,inplace=True)
+    return students
